@@ -1,11 +1,12 @@
 import { View,StyleSheet } from "react-native";
 import React from 'react';
-import { Feather } from "@expo/vector-icons";
+//import { Feather } from "@expo/vector-icons";
+import Icon from "../../components/Icon"
 
 import Header from '../../components/Header'
 import MemoListItem from "../../components/MemoListItem";
 import CircleButton from "../../components/CircleButton";
-const Index = (): JSX.Element => {
+const List = (): JSX.Element => {
   return(
 <View style={styles.container}>
 {/* Header */}
@@ -21,7 +22,9 @@ const Index = (): JSX.Element => {
     </View>
 
 {/* Button */}
-    <CircleButton><Feather  name = 'plus' size = {40} /></CircleButton>
+    <CircleButton>
+        <Icon name='plus' size = {40} color = '#ffffff'/>
+    </CircleButton>
 
 </View>
 
@@ -35,4 +38,4 @@ const styles = StyleSheet.create({
     backgroundColor : '#ffffff'
   }
 })
-export default Index
+export default List

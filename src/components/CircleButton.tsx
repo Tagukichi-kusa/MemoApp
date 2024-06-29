@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     shadowColor : '#000000',
     shadowOpacity : 0.25,   //透明度
     shadowRadius : 4,        //ぼかし
-    shadowOffset : {width: 2,height: 5},
+    shadowOffset : {width: 2,height: 1},
     //elevation系はandroidのみ
     elevation : 8
   },
