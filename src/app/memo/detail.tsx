@@ -1,5 +1,6 @@
 import React from "react";
 import {View,Text,StyleSheet,ScrollView} from "react-native"
+import {Feather} from "@expo/vector-icons"
 
 import Header from "../../components/Header";
 import CircleButton from "../../components/CircleButton";
@@ -20,7 +21,7 @@ const Detail = ():JSX.Element => {
                     食事管理も適度に行なっていけるとなお良しです。
                 </Text>
             </ScrollView>
-            <CircleButton style = {{ top : 160,bottom : 'auto' }}>+</CircleButton>
+            <CircleButton style = {{ top : 160, bottom : 'auto' }}><Feather  name = 'plus' size = {40} /></CircleButton>
         </View>
 
     )
