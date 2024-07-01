@@ -8,7 +8,7 @@ import fontSelection from "../../assets/fonts/selection.json"
 
 
 const CustomIcon = createIconSetFromIcoMoon(
-    fontSelection,  //JSONファイル
+    fontSelection,  //自身で作成したJSONファイル
     'IcoMoon',
     'icomoon.ttf'   //ttfファイル
 )
