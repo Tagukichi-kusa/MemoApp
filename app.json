@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "MemoApp",
+    "scheme": "MemoApp",
     "slug": "MemoApp",
     "sheme": "memo-app",
     "version": "1.0.0",
