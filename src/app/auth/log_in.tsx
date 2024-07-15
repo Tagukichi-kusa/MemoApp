@@ -3,6 +3,7 @@ import {View,Text,TextInput,
     TouchableOpacity,StyleSheet} from 'react-native'
 
 import { Link, router } from "expo-router";
+import { useState } from "react";
 
 // import Header from "../../components/Header";
 import Button from "../../components/Button";
@@ -13,13 +14,32 @@ const handlePress = (): void => {
 }
 
 const LogIn = ():JSX.Element => {
+    const [email,setEmail] = useState('')
+    const [password,setPassword] = useState('')
+
     return(
         <View style= {styles.container}>
             {/* <Header /> */}
             <View style = {styles.inner}>
                 <Text style = {styles.tittle}>Log_in</Text>
-                <TextInput style = {styles.input} value='Email Address' />
-                <TextInput style = {styles.input} value='pass' />
+                <TextInput
+                    style = {styles.input}
+                    value = {email}
+                    onChangeText={(text) => { setEmail(text) }}
+                    autoCapitalize="none"
+                    keyboardType='email-address'    //キーボードタイプ
+                    placeholder='Email Address'     //空の時の表示名
+                    textContentType='emailAddress'  //キーチェーン使用時の自動保管
+                 />
+                <TextInput
+                    style = {styles.input}
+                    value = {password}
+                    onChangeText={(text) => { setPassword(text) }}
+                    autoCapitalize="none"
+                    secureTextEntry                 //入力文字にマスクをかける
+                    placeholder='Password'          //空の時の表示名
+                    textContentType='password'      //キーチェーン使用時の自動保管
+                 />
                 <Button label = 'Submit' onPress={handlePress}/>
                 <View style = {styles.footer}>
                     <Text style = {styles.footerText}>Not registerd???</Text>

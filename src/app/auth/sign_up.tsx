@@ -3,6 +3,7 @@ import {View,Text,TextInput,
     TouchableOpacity,StyleSheet} from 'react-native'
 
 import { Link,router } from "expo-router";
+import { useState } from "react";
 
 // import Header from "../../components/Header";
 import Button from "../../components/Button";
@@ -14,13 +15,31 @@ const handlePress = (): void => {
 }
 
 const SignUp = ():JSX.Element => {
+    const [email,setEmail] = useState('')
+    const [password,setPassword] = useState('')
     return(
         <View style= {styles.container}>
             {/* <Header /> */}
             <View style = {styles.inner}>
                 <Text style = {styles.tittle}>Sign Up</Text>
-                <TextInput style = {styles.input} value='Email Address' />
-                <TextInput style = {styles.input} value='pass' />
+                <TextInput
+                    style = {styles.input}
+                    value = {email}
+                    onChangeText={(text) => { setEmail(text) }}
+                    autoCapitalize="none"           //先頭文字の小文字化
+                    keyboardType='email-address'    //キーボードタイプ
+                    placeholder='Email Address'     //空の時の表示名
+                    textContentType='emailAddress'  //キーチェーン使用時の自動保管
+                 />
+                <TextInput
+                    style = {styles.input}
+                    value = {password}
+                    onChangeText={(text) => { setPassword(text) }}
+                    autoCapitalize="none"           //先頭文字の小文字化
+                    secureTextEntry                 //入力文字にマスクをかける
+                    placeholder='Password'          //空の時の表示名
+                    textContentType='password'      //キーチェーン使用時の自動保管
+                 />
                 <Button label = 'Submit' onPress={handlePress} />
                 <View style = {styles.footer}>
                     <Text style = {styles.footerText}>Already registered?</Text>
