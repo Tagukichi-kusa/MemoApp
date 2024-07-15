@@ -3,14 +3,18 @@ import {View,Text,StyleSheet,ScrollView} from "react-native"
 //import {Feather} from "@expo/vector-icons"
 import Icon from "../../components/Icon";
 
-import Header from "../../components/Header";
+// import Header from "../../components/Header";
 import CircleButton from "../../components/CircleButton";
+import { router } from "expo-router";
 
+const handlePress = (): void => {
+    router.push('/memo/edit')
+}
 
 const Detail = ():JSX.Element => {
     return(
         <View style = {styles.container}>
-            <Header />
+            {/* <Header /> */}
             <View style = {styles.memoHeader}>
                 <Text style = {styles.memoTittle}>テストテーマ名</Text>
                 <Text style = {styles.memoDate}>2024/03/19 10:00</Text>
@@ -22,7 +26,7 @@ const Detail = ():JSX.Element => {
                     食事管理も適度に行なっていけるとなお良しです。
                 </Text>
             </ScrollView>
-            <CircleButton style = {{ top : 160, bottom : 'auto' }}>
+            <CircleButton onPress={handlePress} style = {{ top : 60, bottom : 'auto' }}>
                 <Icon name='pencil' size = {40} color = '#ffffff'/>
             </CircleButton>
         </View>
