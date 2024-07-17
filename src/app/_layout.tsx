@@ -13,7 +13,7 @@ const Layout = () :JSX.Element => {
         headerBackTitle: 'Back',     //バックボタンの名前
         headerTitleStyle:{
             fontSize:22,
-            fontWeight:'bold'
+            fontWeight:'bold',
         }
 
     }} />
