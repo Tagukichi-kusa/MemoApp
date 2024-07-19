@@ -9,6 +9,7 @@ import LogOutButton from "../../components/LogOutButton";
 //import { Feather } from "@expo/vector-icons";
 import Icon from "../../components/Icon"
 import { router, useNavigation } from "expo-router";
+
 const handlePress = ():void => {
   router.push('/memo/create')
 }

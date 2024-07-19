@@ -10,6 +10,7 @@ import { auth } from "../../config";
 // import Header from "../../components/Header";
 
 const handlePress = (email: string,password: string): void => {
+    //第一引数：auth、第二引数：メールアドレス、第三引数：PASS
     signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             console.log(userCredential.user.uid)

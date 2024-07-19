@@ -15,6 +15,7 @@ import Button from "../../components/Button";
 const handlePress = (email: string,password: string): void => {
     //会員登録
     console.log(email,password)
+    //第一引数：auth、第二引数：メールアドレス、第三引数：PASS
     createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             console.log(userCredential.user.uid)
