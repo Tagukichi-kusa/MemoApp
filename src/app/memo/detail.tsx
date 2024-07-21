@@ -11,19 +11,19 @@ import { onSnapshot, doc } from "firebase/firestore";
 import { auth, db } from "../../config";
 import { type Memo } from "../../../types/memo";
 
-const handlePress = (): void => {
-    router.push('/memo/edit')
+const handlePress = (id : string ): void => {
+    router.push({pathname:'/memo/edit', params:{ id }})
 }
 
 const Detail = ():JSX.Element => {
     //useLocalSearchParamsでLinkのparamsパラメータの中身を呼び出す
-    const { id } = useLocalSearchParams()
+    const id  = String(useLocalSearchParams().id)
     console.log( id )
     const [memo, setMemo] = useState<Memo | null>(null)
     //初期処理
     useEffect(() => {
         if( auth.currentUser === null ){ return }
-        const ref = doc(db, `users/${auth.currentUser.uid}/memos` ,String(id)) //String(id)でドキュメントIDを渡す
+        const ref = doc(db, `users/${auth.currentUser.uid}/memos` ,id ) //String(id)でドキュメントIDを渡す
         //第一引数：接続先情報、第二引数：コールバック関数（memoDocを引数としてドキュメントの中身が格納）
         //unsubscribe関数は戻り値を返す関数 => 画面削除時にreturnでonSnapshotの戻り値を返すようにする
         const unsubscribe = onSnapshot(ref, (memoDoc) => {
@@ -49,7 +49,7 @@ const Detail = ():JSX.Element => {
                     {memo?.bodyText}
                 </Text>
             </ScrollView>
-            <CircleButton onPress={handlePress} style = {{ top : 60, bottom : 'auto' }}>
+            <CircleButton onPress={ () => { handlePress( id ) }} style = {{ top : 60, bottom : 'auto' }}>
                 <Icon name='pencil' size = {40} color = '#ffffff'/>
             </CircleButton>
         </View>
