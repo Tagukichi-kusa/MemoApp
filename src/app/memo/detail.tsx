@@ -5,25 +5,48 @@ import Icon from "../../components/Icon";
 
 // import Header from "../../components/Header";
 import CircleButton from "../../components/CircleButton";
-import { router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
+import { useState,useEffect } from "react";
+import { onSnapshot, doc } from "firebase/firestore";
+import { auth, db } from "../../config";
+import { type Memo } from "../../../types/memo";
 
 const handlePress = (): void => {
     router.push('/memo/edit')
 }
 
 const Detail = ():JSX.Element => {
+    //useLocalSearchParamsでLinkのparamsパラメータの中身を呼び出す
+    const { id } = useLocalSearchParams()
+    console.log( id )
+    const [memo, setMemo] = useState<Memo | null>(null)
+    //初期処理
+    useEffect(() => {
+        if( auth.currentUser === null ){ return }
+        const ref = doc(db, `users/${auth.currentUser.uid}/memos` ,String(id)) //String(id)でドキュメントIDを渡す
+        //第一引数：接続先情報、第二引数：コールバック関数（memoDocを引数としてドキュメントの中身が格納）
+        //unsubscribe関数は戻り値を返す関数 => 画面削除時にreturnでonSnapshotの戻り値を返すようにする
+        const unsubscribe = onSnapshot(ref, (memoDoc) => {
+            console.log(memoDoc.data())
+            const { bodyText, updatedAt } = memoDoc.data() as Memo
+            setMemo({
+                id: memoDoc.id,
+                bodyText: bodyText,
+                updatedAt: updatedAt
+            })
+        })
+        return unsubscribe
+    }, [])
     return(
         <View style = {styles.container}>
             {/* <Header /> */}
             <View style = {styles.memoHeader}>
-                <Text style = {styles.memoTittle}>テストテーマ名</Text>
-                <Text style = {styles.memoDate}>2024/03/19 10:00</Text>
+                <Text style = {styles.memoTittle} numberOfLines={1}>{memo?.bodyText}</Text>
+                <Text style = {styles.memoDate}>{memo?.updatedAt?.toDate().toLocaleDateString('ja-JP')}</Text>
             </View>
             <ScrollView style = {styles.memoBody}>
                 <Text style = {styles.memoBodyText}>
-                    いい調子で筋力アップしていますね。
-                    来週以降もベンチプレスの強度を上げられるように維持していきましょう！！！
-                    食事管理も適度に行なっていけるとなお良しです。
+                    {memo?.bodyText}
                 </Text>
             </ScrollView>
             <CircleButton onPress={handlePress} style = {{ top : 60, bottom : 'auto' }}>
@@ -58,10 +81,10 @@ const styles = StyleSheet.create({
         lineHeight : 16
     },
     memoBody:{
-        paddingVertical:32,
         paddingHorizontal:27
     },
     memoBodyText:{
+        paddingVertical:32,
         fontSize: 16,
         lineHeight : 24,
         color : '#000000'
