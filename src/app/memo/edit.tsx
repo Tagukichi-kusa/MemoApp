@@ -1,8 +1,6 @@
 import React from "react";
-import {View,TextInput,StyleSheet,
-    KeyboardAvoidingView,
-    Alert
-} from  "react-native"
+import {View,TextInput,StyleSheet,Alert} from  "react-native"
+import KeyboardAvoidingView from "../../components/KeyboardAvoidingView";
 
 // import Header from "../../components/Header";
 import CircleButton from "../../components/CircleButton";
@@ -51,13 +49,14 @@ const Edit = ():JSX.Element => {
         })
     } , [])
     return(
-        <KeyboardAvoidingView behavior="height" style = {styles.container}>
+        <KeyboardAvoidingView style = {styles.container}>
             {/* <Header /> */}
             <View style = {styles.inputContainer}>
                 <TextInput
                     multiline style = {styles.input}
                     value={bodyText}
                     onChangeText={(text)=> {setBodyText(text)}}
+                    autoFocus //画面遷移時に自動でカーソル当て
                 />
             </View>
             <CircleButton onPress={()=> { handlePress(id,bodyText) }}>
